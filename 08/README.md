@@ -79,7 +79,7 @@ if testCase.want != got {
 
 So this test is really just the same as every previous test, except we do the test for multiple different inputs and outputs, instead of just one. This is called a _table-driven test_, and it's a very common pattern in Go. Almost all the tests you ever write will look very similar to this, in their basic structure, so it's worth taking a few minutes to make sure you really understand what it's doing.
 
-Once you're happy with this, your job for this exercise is to add some more test cases. When we're thinking up examples to test our functions with, in a sense, we want to think in an _adversarial_ way. We want things which are likely to fail, if the function isn't quite correct.
+Once you're happy with this, your job for this exercise is to add some more test cases. When we're thinking up examples to test our functions with, in a sense, we want to think in an _adversarial_ way. We want things that are likely to fail if the function isn't quite correct.
 
 So, for this exercise, you could think of various different kinds of inputs:
 

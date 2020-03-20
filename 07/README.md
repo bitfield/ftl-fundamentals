@@ -34,4 +34,6 @@ we should get the result:
 "Hi there yourself!"
 ```
 
+Just as with the tests in previous exercises, if the result is different from what we expected, the test should fail with an error that shows what was expected and what was actually received. This is much more helpful than a test that simply says something like `Wrong result`, for example.
+
 Once your test is failing satisfactorily, go ahead and implement `ReturnGreeting`, so that the test passes.

@@ -9,9 +9,9 @@ Create a `calculator_test.go` file containing all four of the calculator tests y
 
 You don't need to write anything new here; just copy and paste the code from the previous two exercises. Do the same for the `calculator` package, so that we have a calculator with `Add`, `Subtract`, `Multiply`, and `Divide` functions, all tested. (Don't forget to create a `go.mod` file!)
 
-Recall that in the previous exercise we had to avoid any test inputs to `Divide` where `b` is zero. This time, we're going to extend `TestDivide` so that it deliberately triggers a division by zero.
+Recall that in the previous exercise we had to avoid any test inputs to `Divide` where `b` is zero. This time, we're going to extend `TestDivide` so that it deliberately triggers a division by zero, and checks that the `Divide` function handles this correctly.
 
-What should the `Divide` function do in this case? Not crash the program, that's for sure. Instead, we'll make it return an error. In fact, `Divide` will return _two_ values. Right now it looks something like this:
+So what _should_ the `Divide` function do in this case? Not crash the program, that's for sure. Instead, we'll make it return an error. In fact, `Divide` will return _two_ values. Right now it looks something like this:
 
 ```go
 func Divide(a, b int) int {
@@ -27,13 +27,13 @@ func Divide(a, b int) (int, error) {
 
 There are now two possibilities:
 
-1. If `b` is zero, we can't do the division, so we return zero for the result, plus an error value containing a suitable message explaining what's wrong (you can use `errors.New(...)` for this).
+1. If `b` is zero, we can't do the division, so we return zero for the result, plus an error value containing a suitable message explaining what's wrong (you can use `errors.New(...)` to create this error value).
 
 2. On the other hand, if `b` is non-zero, then we can do the division as normal, and return the result, and the accompanying error value will be `nil`.
 
-You don't need to do anything to the `Divide` function yet, because when we're developing test-first, we always start by updating the test to test the new functionality that we want. Only then do we actually implement that functionality.
+You don't need to do anything to the `Divide` function yet, though. When we're developing test-first, we always start by updating the test to test the new functionality that we want. Only then do we actually implement that functionality.
 
-So how do we test for this? Well, in just the same way as we've done before: by calling the function, and comparing the results against what's expected. But this time, we have _two_ results, and _two_ expectations.
+So how _do_ we test for this? Well, in just the same way as we've done before: by calling the function, and comparing the results against what's expected. But this time, we have _two_ results, and _two_ expectations.
 
 A simple way to do this would be to extend the test case struct like this:
 
