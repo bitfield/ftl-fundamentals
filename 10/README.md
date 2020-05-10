@@ -1,6 +1,10 @@
-Now that you're happy writing multiple tests with multiple test cases, let's bring together the work you've done in the last couple of exercises.
+# 10 - Planning to Fail
 
-Create a `calculator_test.go` file containing all four of the calculator tests you've written so far:
+![](../img/mistake.svg)
+
+Now that you're happy writing multiple tests with multiple test cases, let's bring together the work you've done in the last few exercises.
+
+**TASK:** Create a `calculator_test.go` file containing all four of the calculator tests you've written so far:
 
 * `TestAdd`
 * `TestSubtract`
@@ -69,12 +73,53 @@ For each test case, we're just specifying that an error is expected, or not. For
 {a: 1, b: 0, want: 0, errExpected: true},
 ```
 
-Go ahead and make this change, and update the existing test cases for `TestDivide` to fit the new structure. We don't have any divide-by-zero cases at the moment, so `errExpected` should be `false` for every case. Make sure that your test checks both that the value returned by `Divide` matches `testCase.want`, and that the error value is `nil` if `testCase.errExpected` is false.
+**TASK:** Update the existing test cases for `TestDivide` to add the new `errExpected` field. We don't have any divide-by-zero cases at the moment, so `errExpected` should be `false` for every case.
 
-Naturally enough, the test will now fail, because we didn't yet update `Divide` to return the error value along with the result. Go ahead and do that now, so that the test passes.
+## Errors and expectations
 
-Finally, add a divide-by-zero test case, and make _that_ pass! Check that it really works by setting the `errExpected` field to `false`. The test should fail now, because an error was not expected, but one was returned. If the test still passes even when there's an unexpected error, there's something wrong with the test!
+How do we test whether the function is returning errors when it's supposed to (and not returning them when it's not supposed to)? The first thing we need to do is to update the code to account for the fact that `Divide` now returns two values: the _data_ value (the answer to the sum, if there is one), and the _error_ value (indicating whether or not there was an error)
+
+There's a convention in Go that, when a function returns both a data and an error value, we should ignore the data value if there's an error. In other words, the presence of an error means that the data value is invalid and shouldn't be used. That makes sense: if we try to divide a number by zero, for example, not only is that an error, but there's no meaningful data value we could return.
+
+It's clear from this that when we're testing functions that can return errors, we need to _check the error value first_. If there's an error, we _need not_ check the data value against expectations, and in fact we _must not_, because it doesn't even make sense to expect anything in this case.
+
+So there are four possible outcomes for a given test case:
+
+1. The error value is `nil` (indicating no error), and the data value is what we expected (pass)
+2. The error is `nil`, but the data value is wrong (fail)
+3. The error is not `nil`, and `errExpected` is true, indicating that we expected an error (pass)
+4. The error is not `nil`, but `errExpected` is false (fail)
+
+**TASK:** Update the code of `TestDivide` so that it receives and checks the error value that will be returned from `Divide`, and fails the test if we _expected_ an error but didn't get one, or we _got_ an error we didn't expect.
+Provided the error is non-nil, the test should also check the data value.
+
+Don't try running the tests yet, because they won't work: we didn't yet update `Divide` to return the new error value we've added to our test cases!
+
+**TASK:** Update `Divide` to return a suitable error value along with the data value. In the case of an error, as we've seen, it doesn't matter what data value we actually return, but the convention is to return zero. For example:
+
+```go
+return 0, errors.New("can't divide by zero")
+```
+
+The tests should now pass!
+
+**TASK:** Check your test logic by changing one of the test cases to expect an error (set `errExpected: true`). This should cause the test case to fail. If not, there's something wrong!
+
+Return the test case to its original state once you've checked this.
+
+**TASK:** Add a new test case that triggers a divide-by-zero error, and make _that_ pass!
+
+Check that it really works by setting the `errExpected` field on the test case to `false`. If the test still passes even when there's an unexpected error, there's something wrong with the test!
 
 Once you're satisfied that the test fails correctly when it should, fix the test data again so that the test passes.
 
-Nice work. It's time to take a break. Why not reward yourself with a piece of cake, or a tasty snack of your choice?
+## Done?
+
+When your tests pass, you're done! That's it for this set of exercises.
+Nice work!
+
+It's time to take a break. Why not reward yourself with a piece of cake, or a tasty snack of your choice?
+
+If you'd like some further reading, try:
+
+* [Go tutorials from Bitfield Consulting](https://bitfieldconsulting.com/golang)

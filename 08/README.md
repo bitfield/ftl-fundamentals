@@ -1,16 +1,10 @@
-Great progress! You've mastered some really important things:
+# 08 - Cold Calculations
 
-* How to run tests
-* How to format your code
-* How to write tests from scratch and make them pass
-* How to write a package from scratch, test-first
-* How to create a `go.mod` file for a package
+![](../img/crash-dummy.svg)
 
-From now on, we'll take these fundamental skills for granted. The exercises won't always explicitly say "Write a test to do so-and-so and make it pass"; when they say "Write a function to do so-and-so", understand that you'll be expected to write a suitable test first, then make it pass by implementing the function, in the same way that you've been doing up to now.
+You're going to implement a simple calculator in Go, as package `calculator`. The first thing we want it to do is add two numbers and return the result, so we'll need a `calculator.Add` function.
 
-For this exercise, though, part of the test has been written for you. We are going to implement a simple calculator in Go, in package `calculator`. The first thing we want it to do is add two numbers and return the result, so we'll need a `calculator.Add` function.
-
-Here's the test:
+To get you started, the `TestAdd` function has already been written:
 
 ```go
 func TestAdd(t *testing.T) {
@@ -20,7 +14,7 @@ func TestAdd(t *testing.T) {
 	}{
 		{a: 1, b: 1, want: 2},
 		{a: 2, b: 2, want: 4},
-		{a: 6, b: 7, want: 12},
+		{a: 6, b: 7, want: 13},
 	}
 	for _, testCase := range testCases {
 		got := calculator.Add(testCase.a, testCase.b)
@@ -31,7 +25,7 @@ func TestAdd(t *testing.T) {
 }
 ```
 
-It looks a bit more complicated than the previous tests we've seen, but that's really only because it tests multiple _cases_. For example, the first case is 1 plus 1, and the result should be 2. The second case is 2 plus 2, and the result should be 4, and so on.
+It looks a bit more complicated than the previous tests we've seen, but that's really only because it tests multiple _cases_. For example, the first case is 1 plus 1, and the result should be 2. The second case is 2 plus 2, and the result should be 4, and so on. Let's see how it works.
 
 We first of all set up the `struct` type for our test case:
 
@@ -88,11 +82,11 @@ So, for this exercise, you could think of various different kinds of inputs:
 * One input zero, the other negative
 * Both inputs zero
 
-And so on! Update the test to include a total of ten different test cases (that is, ten different pairs of inputs and expected results).
+**TASK:** Update the test to include a total of five different test cases (that is, five different pairs of inputs and expected results).
 
-When you've done that, implement the `calculator` package and the `Add` function to make the test pass. You'll need to create a `calculator.go` file and run `go mod init calculator` to create the `go.mod` file declaring this package. Have a look at previous exercises if you're not quite sure how to do this.
+**TASK:** Create the `calculator` package and write the `Add` function to make the test pass. You'll need to create a `calculator.go` file and run `go mod init calculator` to create the `go.mod` file declaring this package. Have a look at previous exercises if you're not quite sure how to do this.
 
-Once you've made the test pass, to make sure the test is really working, deliberately change one of the expectations to be wrong. For example, try a test case like this:
+**TASK:** Once you've made the test pass, let's make sure the test is really working, by deliberately changing one of the expectations to be wrong. For example, try a test case like this:
 
 ```go
 {a: 1, b: 1, want: 3}
@@ -101,3 +95,15 @@ Once you've made the test pass, to make sure the test is really working, deliber
 If this doesn't fail, there's something wrong with the test code, isn't there?
 
 Once you've satisfied yourself that the test really tests what you think it does, fix the test cases so that they all pass, and go on to the next exercise.
+
+## Done?
+
+When all your test cases pass, you're done! Go on to the next exercise:
+
+* [Special Operations](../09/README.md)
+
+## What's this?
+
+This is one of a set of introductory Go exercises by [John Arundel](https://bitfieldconsulting.com/golang/learn) called [For the Love of Go - Fundamentals](../README.md).
+
+<small>Gopher image by [egonelbre](https://github.com/egonelbre/gophers)</small>
