@@ -10,8 +10,6 @@ This is a set of introductory exercises in Go programming, suitable for complete
 
 (If you do already know something about Go, you should find these exercises relatively straightforward, but still worth doing.)
 
-* [I'm impatient, take me straight to the first exercise](01/README.md)
-
 ## What you'll need
 
 You'll need to install Go on your computer, if you don't have it already (if you can run the command `go version` without errors, you're all set!)
@@ -32,6 +30,7 @@ In this set of exercises, you'll learn:
 * How to declare and import Go _packages_ (units of code)
 * How to design multiple _test cases_ and use them in your tests
 * How to test error handling in your programs
+* A simple, reliable, test-first development workflow
 
 ## Test-driven development
 
@@ -467,7 +466,7 @@ This would be a reasonable output. What we _don't_ want to see is something like
 Divide(6, 0): want 0, got ...
 ```
 
-Why not? Because the reason the test is failing is that the function is _not returning an error_ when it's supposed to. In that situation, the data value is entirely irrelevant, and comparing it against any expectation would be a waste of time. Worse, it would give a misleading message, making it harder to debug the problem.
+Why not? Because the reason the test is failing is that the function is _not returning an error_ when it's supposed to. In that situation, the data value is entirely irrelevant, and comparing it against any expectation would be a waste of time. Worse, it would give a misleading message, making it harder to debug the problem. (A good way to catch this kind of issue is to give _obviously crazy_ `want` values for your error test cases, such as `999`. If you see these values in your test outputs, something's wrong with the test, because in the case of unexpected error status, it shouldn't even check the data value.)
 
 The implication of this is that the test needs to check the error value against expectation _before even looking at the data value_. Here's one way to do that:
 
@@ -535,7 +534,7 @@ You can use any standard or third-party libraries you think are appropriate. The
 
 When the feature is complete to your own satisfaction, you're done! Nice work. The company has awarded you a sizeable bonus, and an all-expenses-paid vacation. Enjoy it!
 
-**STRETCH GOAL:** Extend your existing tests and functions to allow _any_ number of inputs to `Add`, `Subtract`, `Multiply`, and `Divide`. For example, calling `Divide(12, 4, 3)` should divide 12 by 4, divide the result of that by 3, then return _that_ result. Calling `Multiply` with ten inputs should return the result of multiplying them all together.
+**STRETCH GOAL:** Extend your existing tests and functions to allow _two or more_ inputs to `Add`, `Subtract`, `Multiply`, and `Divide`. For example, calling `Divide(12, 4, 3)` should divide 12 by 4, divide the result of that by 3, then return _that_ result. Calling `Multiply` with ten inputs should return the result of multiplying them all together.
 
 **STRETCH GOAL 2:** Write a function which accepts strings of the form `12 * 3`, for example, and returns the result. You only need to handle expressions which have a single floating-point value, followed by a single operator, followed by a single floating-point value, ignoring any whitespace. For example, the following should all be valid inputs to your function:
 
@@ -557,5 +556,6 @@ When the feature is complete to your own satisfaction, you're done! Nice work. T
 You can find more Go tutorials and exercises here:
 
 * [Go tutorials from Bitfield](https://bitfieldconsulting.com/golang)
+* [The G-machine](https://github.com/bitfield/gmachine)
 
-<small>Gopher image by [egonelbre](https://github.com/egonelbre/gophers)</small>
+<small>Gopher images by the magnificent [egonelbre](https://github.com/egonelbre/gophers)</small>
