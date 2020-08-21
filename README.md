@@ -551,11 +551,16 @@ When the feature is complete to your own satisfaction, you're done! Nice work. T
 
 * [Learn Go with mentoring](https://bitfieldconsulting.com/golang/learn)
 
+## What's next?
+
+You might like to try another set of exercises in this series:
+
+* [The G-machine](https://github.com/bitfield/gmachine) guides you through the development of a simplified virtual CPU in Go, complete with its own machine language. Along the way you'll learn some useful computer science fundamentals.
+
 ## Further reading
 
 You can find more Go tutorials and exercises here:
 
 * [Go tutorials from Bitfield](https://bitfieldconsulting.com/golang)
-* [The G-machine](https://github.com/bitfield/gmachine)
 
 <small>Gopher images by the magnificent [egonelbre](https://github.com/egonelbre/gophers)</small>
