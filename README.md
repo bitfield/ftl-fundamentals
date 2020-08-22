@@ -472,8 +472,8 @@ The implication of this is that the test needs to check the error value against 
 
 ```go
 errReceived := err != nil
-if errExpected != errReceived {
-	t.Errorf("Divide(%f, %f): unexpected error status: %v", errReceived)
+if tc.errExpected != errReceived {
+	t.Fatalf("Divide(%f, %f): unexpected error status: %v", errReceived)
 }
 ```
 
@@ -484,14 +484,42 @@ What is `errReceived`? It's a boolean value which tells us whether or not we got
 A shorter way to write this logic is:
 
 ```go
-if errExpected != (err != nil) {
+if tc.errExpected != (err != nil) {
+	t.Fatalf(...)
+}
 ```
 
 and you'll sometimes see this in Go code. However, this isn't as clear as explicitly setting `errReceived`, and I recommend you be as explicit as possible, especially in tests.
 
+## Failing and bailing
+
+Why call `t.Fatalf()` in this case, rather than `t.Errorf()`? What's the difference?
+
+Calling `t.Errorf()` outputs the failure message, but the test function will continue executing (it might go on to make other comparisons, for example). On the other hand, `t.Fatalf()` outputs its failure message and exits the test function immediately. It fails and bails, you might say.
+
+Bailing is useful when we have established that things are so broken that there's no point continuing with the test. For example, if the error status from the function is unexpected, then comparing the data value is pointless (indeed, it would be misleading about the causes of the failure). So `t.Fatalf()` allows us to skip any further checks within this test (though it doesn't stop _other_ test functions from being run. It bails out of _this_ test, not all tests.)
+
+Another common use of `t.Fatalf()` is when there's some error setting up the test itself. For example, suppose we want to compare the output of a function with the contents of some file (known as a _golden file_, and conventionally placed in a `testdata/` directory). We might start by reading this file from disk, in preparation for comparing it with the test output. But if reading the file fails for some reason (file missing, bad permissions, out of memory; life is full of unexpected snags) then clearly there's no point continuing with this test. Bailing out with `t.Fatalf()` (and some diagnostic information) is appropriate here.
+
+## Checking the data value
+
+There's one thing left to do in this test, and it's something we've done before: checking the data value returned from the function against our expectation.
+
+However, now there's an extra subtlety, because we're dealing with a function that can error. When we're testing a case which is _supposed_ to error, we don't want to check the data value. No expectation for it would be meaningful (indeed, if we're wily enough, we have set an obviously wrong expectation of `999`, or something like that, to detect precisely this problem).
+
+Therefore, once we have established that the error status is as expected (if not, we've already failed and bailed), we can write:
+
+```go
+if !tc.errExpected && tc.want != got {
+```
+
+In other words, compare the data value _only if the test case does not expect an error_.
+
+**GOAL:** Write the minimum code necessary to make `TestDivide` pass.
+
 When your test cases all pass, and you've verified them all by deliberately breaking their expectations, and you've checked that the test outputs the correct failure message for unexpected error statuses, then you can move on to the next (and final) section.
 
-**STRETCH GOAL:** Generate _random_ test inputs for your test functions instead of using prepared cases (you can use the `math/rand` library for this). For example, when testing `Add` you might generate two random `float64` values, sum them to get the expected result (_not_ using the `Add` function!), and call `Add` to verify that it returns the same answer. Do this a few hundred times for each function.
+**STRETCH GOAL:** Write a new test for one or more of your functions which generates _random_ test inputs instead of using prepared cases (you can use the `math/rand` library for this). For example, you might write a `TestAddRandom` function which generates two random `float64` values, sums them to get the expected result (_not_ using the `Add` function!), and calls `Add` to verify that it returns the same answer. Do this many times, say, a hundred times, to give the function a good workout.
 
 # 7: Roots music
 
