@@ -72,4 +72,15 @@ func TestDivide(t *testing.T) {
 		{name: "0 divide by a number", a: 0, b: 1, want: 0, errExpected: false},
 		{name: "Negative number", a: -3, b: 1, want: -3, errExpected: false},
 	}
+
+	for _, tc := range testCases {
+		got, err := calculator.Divide(tc.a, tc.b)
+		errReceived := err != nil
+		if tc.errExpected != errReceived {
+			t.Fatalf("%s - Divide(%f, %f): errExpected %t, error %v", tc.name, tc.a, tc.b, tc.errExpected, err)
+		}
+		if !tc.errExpected && tc.want != got {
+			t.Errorf("%s - Divide(%f, %f): want %f, got %f", tc.name, tc.a, tc.b, tc.want, got)
+		}
+	}
 }
