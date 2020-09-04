@@ -25,7 +25,7 @@ func TestSubtract(t *testing.T) {
 
 func TestMultiply(t *testing.T) {
 	t.Parallel()
-	var want float64 = 7
+	var want float64 = 6
 	got := calculator.Multiply(3, 2)
 	if want != got {
 		t.Errorf("want %f, got %f", want, got)
