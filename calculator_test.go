@@ -6,9 +6,10 @@ import (
 )
 
 type TestCase struct {
-	name string
-	a, b float64
-	want float64
+	name        string
+	a, b        float64
+	want        float64
+	errExpected bool
 }
 
 func TestAdd(t *testing.T) {
