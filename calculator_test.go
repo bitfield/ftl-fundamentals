@@ -107,7 +107,7 @@ func TestSqrt(t *testing.T) {
 	t.Parallel()
 
 	testCases := []TestCase{
-		{name: "Positive Number", a: 4, want: 2, errExpected: false},
+		{name: "Positive Number", a: 144, want: 12, errExpected: false},
 		{name: "Negative number", a: -2, want: 0, errExpected: true},
 		{name: "Zero", a: 0, want: 0, errExpected: false},
 	}
@@ -119,7 +119,7 @@ func TestSqrt(t *testing.T) {
 			t.Fatalf("%s - Sqrt(%f): errExpected %t, error %v", tc.name, tc.a, tc.errExpected, err)
 		}
 		if !tc.errExpected && tc.want != got {
-			t.Errorf("%s - Sqrt(%f): want %f, got %f", tc.name, tc.a, tc.want, got)
+			t.Fatalf("%s - Sqrt(%f): want %f, got %f", tc.name, tc.a, tc.want, got)
 		}
 	}
 }
