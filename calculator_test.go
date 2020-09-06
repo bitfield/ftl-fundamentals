@@ -20,6 +20,7 @@ func TestAdd(t *testing.T) {
 
 	testCases := []TestCase{
 		{name: "Two positive numbers", a: 2, b: 2, n: []float64{}, want: 4},
+		{name: "Four positive numbers", a: 2, b: 2, n: []float64{1, 2}, want: 7},
 		{name: "One negative number", a: -1, b: 0, want: -1},
 		{name: "One zero number", a: 0, b: 0, want: 0},
 	}
