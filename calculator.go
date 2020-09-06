@@ -6,7 +6,7 @@ import (
 	"math"
 )
 
-// Add takes two numbers and returns the result of adding them together.
+// Add takes two numbers or more and returns the result of adding them together.
 func Add(a, b float64, numbers ...float64) float64 {
 	sum := a + b
 	for _, n := range numbers {
@@ -15,10 +15,14 @@ func Add(a, b float64, numbers ...float64) float64 {
 	return sum
 }
 
-// Subtract takes two numbers and returns the result of subtracting the second
+// Subtract takes two numbers or more and returns the result of subtracting them
 // from the first.
-func Subtract(a, b float64) float64 {
-	return a - b
+func Subtract(a, b float64, numbers ...float64) float64 {
+	result := a - b
+	for _, n := range numbers {
+		result -= n
+	}
+	return result
 }
 
 // Multiply takes two numbers and returns the result of multiplying them together.
