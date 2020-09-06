@@ -53,15 +53,16 @@ func TestSubtract(t *testing.T) {
 	t.Parallel()
 
 	testCases := []TestCase{
-		{name: "Two positive numbers", a: 2, b: 1, want: 1},
+		{name: "Two positive numbers", a: 2, b: 1, n: []float64{}, want: 1},
+		{name: "Four positive numbers", a: 4, b: 1, n: []float64{1, 1}, want: 1},
 		{name: "Two positive numbres which substract to a negative", a: 2, b: 3, want: -1},
 		{name: "Two negative numbers which substract to a positive", a: -1, b: -3, want: 2},
 	}
 
 	for _, tc := range testCases {
-		got := calculator.Subtract(tc.a, tc.b)
+		got := calculator.Subtract(tc.a, tc.b, tc.n...)
 		if tc.want != got {
-			t.Errorf("%s - Substract(%f, %f): want %f, got %f", tc.name, tc.a, tc.b, tc.want, got)
+			t.Errorf("%s - Substract(%f, %f, %f): want %f, got %f", tc.name, tc.a, tc.b, tc.n, tc.want, got)
 		}
 	}
 }
