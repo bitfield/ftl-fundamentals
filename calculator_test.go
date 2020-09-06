@@ -71,15 +71,16 @@ func TestMultiply(t *testing.T) {
 	t.Parallel()
 
 	testCases := []TestCase{
-		{name: "Two positive numbers", a: 2, b: 3, want: 6},
+		{name: "Two positive numbers", a: 2, b: 3, n: []float64{}, want: 6},
+		{name: "Four positive numbers", a: 2, b: 3, n: []float64{2, 2}, want: 24},
 		{name: "One zero number", a: 0, b: 4, want: 0},
 		{name: "One negative number", a: 3, b: -1, want: -3},
 	}
 
 	for _, tc := range testCases {
-		got := calculator.Multiply(tc.a, tc.b)
+		got := calculator.Multiply(tc.a, tc.b, tc.n...)
 		if tc.want != got {
-			t.Errorf("%s - Multiply(%f, %f): want %f, got %f", tc.name, tc.a, tc.b, tc.want, got)
+			t.Errorf("%s - Multiply(%f, %f, %f): want %f, got %f", tc.name, tc.a, tc.b, tc.n, tc.want, got)
 		}
 	}
 }
