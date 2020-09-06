@@ -2,7 +2,9 @@ package calculator_test
 
 import (
 	"calculator"
+	"math/rand"
 	"testing"
+	"time"
 )
 
 type TestCase struct {
@@ -25,6 +27,22 @@ func TestAdd(t *testing.T) {
 		got := calculator.Add(tc.a, tc.b)
 		if tc.want != got {
 			t.Errorf("%s - Add(%f, %f): want %f, got %f", tc.name, tc.a, tc.b, tc.want, got)
+		}
+	}
+}
+
+func TestAddRandom(t *testing.T) {
+	t.Parallel()
+
+	s := rand.NewSource(time.Now().UnixNano())
+	r := rand.New(s)
+
+	for i := 0; i < 100; i++ {
+		a, b := r.Float64(), r.Float64()
+		want := a + b
+		got := calculator.Add(a, b)
+		if want != got {
+			t.Fatalf("Random Add(%f, %f): want %f, got %f", a, b, want, got)
 		}
 	}
 }
