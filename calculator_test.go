@@ -10,6 +10,7 @@ import (
 type TestCase struct {
 	name        string
 	a, b        float64
+	n           []float64
 	want        float64
 	errExpected bool
 }
@@ -18,15 +19,15 @@ func TestAdd(t *testing.T) {
 	t.Parallel()
 
 	testCases := []TestCase{
-		{name: "Two positive numbers", a: 2, b: 2, want: 4},
+		{name: "Two positive numbers", a: 2, b: 2, n: []float64{}, want: 4},
 		{name: "One negative number", a: -1, b: 0, want: -1},
 		{name: "One zero number", a: 0, b: 0, want: 0},
 	}
 
 	for _, tc := range testCases {
-		got := calculator.Add(tc.a, tc.b)
+		got := calculator.Add(tc.a, tc.b, tc.n...)
 		if tc.want != got {
-			t.Errorf("%s - Add(%f, %f): want %f, got %f", tc.name, tc.a, tc.b, tc.want, got)
+			t.Errorf("%s - Add(%f, %f, %f): want %f, got %f", tc.name, tc.a, tc.b, tc.n, tc.want, got)
 		}
 	}
 }
