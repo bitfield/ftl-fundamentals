@@ -25,9 +25,13 @@ func Subtract(a, b float64, numbers ...float64) float64 {
 	return result
 }
 
-// Multiply takes two numbers and returns the result of multiplying them together.
-func Multiply(a, b float64) float64 {
-	return a * b
+// Multiply takes two or more numbers and returns the result of multiplying them together.
+func Multiply(a, b float64, numbers ...float64) float64 {
+	result := a*b
+	for _, n := range numbers {
+		result *= n
+	}
+	return result
 }
 
 // Divide takes two number and returns the result of dividing the first
