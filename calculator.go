@@ -27,20 +27,27 @@ func Subtract(a, b float64, numbers ...float64) float64 {
 
 // Multiply takes two or more numbers and returns the result of multiplying them together.
 func Multiply(a, b float64, numbers ...float64) float64 {
-	result := a*b
+	result := a * b
 	for _, n := range numbers {
 		result *= n
 	}
 	return result
 }
 
-// Divide takes two number and returns the result of dividing the first
-// with the second. If the second number is zero it returns an error.
-func Divide(a, b float64) (float64, error) {
+// Divide takes two or more numbers and returns the result of dividing the first
+// with the second and the result with the others. If one number following the first one is zero it returns an error.
+func Divide(a, b float64, numbers ...float64) (float64, error) {
 	if b == 0 {
 		return 0, errors.New("division by 0")
 	}
-	return a / b, nil
+	result := a / b
+	for _, n := range numbers {
+		if n == 0 {
+			return 0, errors.New("division by 0")
+		}
+		result /= n
+	}
+	return result, nil
 }
 
 // Sqrt takes one number and returns its square root.
