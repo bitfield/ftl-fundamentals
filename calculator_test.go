@@ -89,17 +89,18 @@ func TestDivide(t *testing.T) {
 	t.Parallel()
 
 	testCases := []TestCase{
-		{name: "Two positive numbers", a: 4, b: 2, want: 2, errExpected: false},
+		{name: "Two positive numbers", a: 4, b: 2, n: []float64{}, want: 2, errExpected: false},
+		{name: "Four positive numbers", a: 8, b: 2, n: []float64{2, 2}, want: 2, errExpected: false},
 		{name: "Division by 0", a: 8, b: 0, want: 0, errExpected: true},
 		{name: "0 divide by a number", a: 0, b: 1, want: 0, errExpected: false},
 		{name: "Negative number", a: -3, b: 1, want: -3, errExpected: false},
 	}
 
 	for _, tc := range testCases {
-		got, err := calculator.Divide(tc.a, tc.b)
+		got, err := calculator.Divide(tc.a, tc.b, tc.n...)
 		errReceived := err != nil
 		if tc.errExpected != errReceived {
-			t.Fatalf("%s - Divide(%f, %f): errExpected %t, error %v", tc.name, tc.a, tc.b, tc.errExpected, err)
+			t.Fatalf("%s - Divide(%f, %f, %f): errExpected %t, error %v", tc.name, tc.a, tc.b, tc.n, tc.errExpected, err)
 		}
 		if !tc.errExpected && tc.want != got {
 			t.Errorf("%s - Divide(%f, %f): want %f, got %f", tc.name, tc.a, tc.b, tc.want, got)
