@@ -128,3 +128,32 @@ func TestSqrt(t *testing.T) {
 		}
 	}
 }
+
+func TestStringCalc(t *testing.T) {
+	t.Parallel()
+
+	testCases := []struct {
+		name        string
+		input       string
+		want        float64
+		errExpected bool
+	}{
+		{name: "Add", input: "1 + 1.5", want: 2.5, errExpected: false},
+		{name: "Substract", input: "100-0.1", want: 99.9, errExpected: false},
+		{name: "Multiply", input: "2*2", want: 4, errExpected: false},
+		{name: "Divide", input: "18   /   6", want: 3, errExpected: false},
+		{name: "Error", input: "19", want: 0, errExpected: true},
+	}
+
+	for _, tc := range testCases {
+		got, err := calculator.StringCalc(tc.input)
+		errReceived := err != nil
+		if tc.errExpected != errReceived {
+			t.Fatalf("%s - StringCalc(%s): errExpecter %b, error %v", tc.name, tc.input, tc.errExpected, err)
+		}
+		if !tc.errExpected && tc.want != got {
+			t.Fatalf("%s - StringCalc(%s): want %f, got %f", tc.name, tc.input, tc.want, got)
+		}
+	}
+
+}
