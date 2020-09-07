@@ -149,7 +149,7 @@ func TestStringCalc(t *testing.T) {
 		got, err := calculator.StringCalc(tc.input)
 		errReceived := err != nil
 		if tc.errExpected != errReceived {
-			t.Fatalf("%s - StringCalc(%s): errExpecter %b, error %v", tc.name, tc.input, tc.errExpected, err)
+			t.Fatalf("%s - StringCalc(%s): errExpecter %t, error %v", tc.name, tc.input, tc.errExpected, err)
 		}
 		if !tc.errExpected && tc.want != got {
 			t.Fatalf("%s - StringCalc(%s): want %f, got %f", tc.name, tc.input, tc.want, got)
