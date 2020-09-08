@@ -25,14 +25,14 @@ func TestAdd(t *testing.T) {
 
 	t.Parallel()
 	for _, c := range cases {
-		t.Run(c.name, testAddFunc(c))
+		t.Run(c.name, testFunc(c, calculator.Add))
 	}
 }
 
-func testAddFunc(c testCase) func(*testing.T) {
+func testFunc(c testCase, f func(float64, float64) float64) func(*testing.T) {
 	return func(t *testing.T) {
 		var want float64 = c.expected
-		got := calculator.Add(c.firstInput, c.secondInput)
+		got := f(c.firstInput, c.secondInput)
 		if want != got {
 			t.Errorf("want %f, got %f", want, got)
 		}
