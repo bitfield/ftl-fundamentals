@@ -5,6 +5,13 @@ import (
 	"testing"
 )
 
+type testCase struct {
+	name        string
+	firstInput  float64
+	secondInput float64
+	expected    float64
+}
+
 func TestAdd(t *testing.T) {
 	t.Parallel()
 	var want float64 = 4
