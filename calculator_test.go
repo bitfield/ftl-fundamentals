@@ -44,9 +44,9 @@ func TestSubtract(t *testing.T) {
 		{"Two positive numbers", 5, 1, 4},
 		{"Two negative numbers", -5, -1, -4},
 		{"Two negative numbers equaling zero", -1, -1, 0},
-		//{"One fractional and one whole number", 5.4, 2.0, 3.4},
+		{"One fractional and one whole number", 5.5, 3.0, 2.5},
 		{"Two fractional numbers", 2.3, 4.3, -2},
-		//{"Two fractional numbers equaling a whole number", 2.3, 1.3, 1},
+		{"Two fractional numbers equaling a whole number", 2.5, 1.5, 1},
 		{"Two negative fractional numbers", -2.5, -1.5, -1},
 	}
 
@@ -57,10 +57,18 @@ func TestSubtract(t *testing.T) {
 }
 
 func TestMultiply(t *testing.T) {
+	cases := []testCase{
+		{"Two positive numbers", 2, 2, 4},
+		{"Two negative numbers", -2, -2, 4},
+		{"One postive number and zero", 1, 0, 0},
+		{"One fractional and one whole number", 5.4, 2, 10.8},
+		{"Two fractional numbers", 2.6, 5.3, 13.78},
+		{"Two fractional numbers equaling a whole number", 1.5, 4, 6},
+		{"Two negative fractional numbers", -1.5, -2.5, 3.75},
+	}
+
 	t.Parallel()
-	var want float64 = 4
-	got := calculator.Multiply(2, 2)
-	if want != got {
-		t.Errorf("want %f, got %f", want, got)
+	for _, c := range cases {
+		t.Run(c.name, testFunc(c, calculator.Multiply))
 	}
 }
