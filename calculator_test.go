@@ -34,17 +34,25 @@ func testFunc(c testCase, f func(float64, float64) float64) func(*testing.T) {
 		var want float64 = c.expected
 		got := f(c.firstInput, c.secondInput)
 		if want != got {
-			t.Errorf("want %f, got %f", want, got)
+			t.Errorf("want %f of type %T, got %f of type %T", want, want, got, got)
 		}
 	}
 }
 
 func TestSubtract(t *testing.T) {
+	cases := []testCase{
+		{"Two positive numbers", 5, 1, 4},
+		{"Two negative numbers", -5, -1, -4},
+		{"Two negative numbers equaling zero", -1, -1, 0},
+		{"One fractional and one whole number", 5.4, 2.0, 3.4},
+		{"Two fractional numbers", 2.3, 4.3, -2},
+		{"Two fractional numbers equaling a whole number", 2.3, 1.3, 1},
+		{"Two negative fractional numbers", -2.5, -1.5, -1},
+	}
+
 	t.Parallel()
-	var want float64 = 2
-	got := calculator.Subtract(4, 2)
-	if want != got {
-		t.Errorf("want %f, got %f", want, got)
+	for _, c := range cases {
+		t.Run(c.name, testFunc(c, calculator.Subtract))
 	}
 }
 
