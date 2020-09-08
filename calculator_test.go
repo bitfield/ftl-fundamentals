@@ -34,7 +34,7 @@ func testFunc(c testCase, f func(float64, float64) float64) func(*testing.T) {
 		var want float64 = c.expected
 		got := f(c.firstInput, c.secondInput)
 		if want != got {
-			t.Errorf("want %f of type %T, got %f of type %T", want, want, got, got)
+			t.Errorf(c.name+": want %f of type %T, got %f of type %T", want, want, got, got)
 		}
 	}
 }
