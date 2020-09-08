@@ -12,6 +12,14 @@ type testCase struct {
 	expected    float64
 }
 
+type testCaseWithErr struct {
+	name        string
+	firstInput  float64
+	secondInput float64
+	errExpected bool
+	expected    float64
+}
+
 func TestAdd(t *testing.T) {
 	cases := []testCase{
 		{"Add two positive numbers", 2, 2, 4},
@@ -31,10 +39,10 @@ func TestAdd(t *testing.T) {
 
 func testFunc(c testCase, f func(float64, float64) float64) func(*testing.T) {
 	return func(t *testing.T) {
-		var want float64 = c.expected
+		want := c.expected
 		got := f(c.firstInput, c.secondInput)
 		if want != got {
-			t.Errorf(c.name+": want %f of type %T, got %f of type %T", want, want, got, got)
+			t.Errorf(c.name+": want %f, got %f", want, got)
 		}
 	}
 }
@@ -70,5 +78,35 @@ func TestMultiply(t *testing.T) {
 	t.Parallel()
 	for _, c := range cases {
 		t.Run(c.name, testFunc(c, calculator.Multiply))
+	}
+}
+
+func TestDivide(t *testing.T) {
+	cases := []testCaseWithErr{
+		{"Divide two positive numbers", 4, 2, false, 2},
+		{"Divide two negative numbers", -4, -2, false, 2},
+		{"Divide one positive number by one negative number", 4, -2, false, -2},
+		{"Divide two fractional positive numbers", 4.2, 2.1, false, 2},
+		{"Divide two fractional negative numbers equaling a whole number", -4.2, -2.1, false, 2},
+		{"Divide one positive number by zero", 4, 0, true, 0},
+	}
+
+	t.Parallel()
+	for _, c := range cases {
+		t.Run(c.name, testDivideFunc(c, calculator.Divide))
+	}
+}
+
+func testDivideFunc(c testCaseWithErr, f func(float64, float64) (float64, error)) func(*testing.T) {
+	return func(t *testing.T) {
+		want := c.expected
+		got, err := f(c.firstInput, c.secondInput)
+		if err != nil && !c.errExpected {
+			t.Errorf(c.name+": wanted %f got an error %w ", want, err)
+		}
+
+		if want != got {
+			t.Errorf(c.name+": want %f, got %f", want, got)
+		}
 	}
 }
