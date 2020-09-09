@@ -129,3 +129,29 @@ func TestAddRandom(t *testing.T) {
 	}
 
 }
+
+func TestSqrt(t *testing.T) {
+	cases := []testCaseWithErr{
+		{"Square root of zero should be zero", 0, 0, false, 0},
+		{"Square root of a negative number should return an error", 0, 0, true, 0},
+	}
+
+	t.Parallel()
+	for _, c := range cases {
+		t.Run(c.name, testSqrtFunc(c, calculator.Sqrt))
+	}
+}
+
+func testSqrtFunc(c testCaseWithErr, f func(float64) (float64, error)) func(*testing.T) {
+	return func(t *testing.T) {
+		want := c.expected
+		got, err := f(c.firstInput)
+		if err != nil && !c.errExpected {
+			t.Errorf(c.name+": wanted %f got an error: %v ", want, err)
+		}
+
+		if want != got {
+			t.Errorf(c.name+": want %f, got %f", want, got)
+		}
+	}
+}
