@@ -27,3 +27,8 @@ func Divide(a, b float64) (float64, error) {
 
 	return a / b, nil
 }
+
+//Sqrt takes a number and returns the square root.
+func Sqrt(a float64) (float64, error) {
+	return 0, nil
+}
