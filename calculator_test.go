@@ -2,7 +2,10 @@ package calculator_test
 
 import (
 	"calculator"
+	"fmt"
+	"math/rand"
 	"testing"
+	"time"
 )
 
 type testCase struct {
@@ -102,11 +105,27 @@ func testDivideFunc(c testCaseWithErr, f func(float64, float64) (float64, error)
 		want := c.expected
 		got, err := f(c.firstInput, c.secondInput)
 		if err != nil && !c.errExpected {
-			t.Errorf(c.name+": wanted %f got an error %w ", want, err)
+			t.Errorf(c.name+": wanted %f got an error: %v ", want, err)
 		}
 
 		if want != got {
 			t.Errorf(c.name+": want %f, got %f", want, got)
 		}
 	}
+}
+
+func TestAddRandom(t *testing.T) {
+	s := rand.NewSource(time.Now().UnixNano())
+	r := rand.New(s)
+
+	for i := 0; i < 100; i++ {
+		first := r.Float64() * 100
+		second := r.Float64() * 100
+		name := fmt.Sprintf("Adding %f and %f", first, second)
+		result := first + second
+		c := testCase{name, first, second, result}
+
+		t.Run(c.name, testFunc(c, calculator.Add))
+	}
+
 }
