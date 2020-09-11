@@ -135,7 +135,7 @@ func TestAddRandom(t *testing.T) {
 func TestSqrt(t *testing.T) {
 	cases := []testCaseWithErr{
 		{"Square root of zero should be zero", 0, 0, false, 0},
-		{"Square root of a negative number should return an error", 0, 0, true, 0},
+		{"Square root of a negative number should return an error", -4, 0, true, 0},
 		{"Square root of a positive whole number", 4, 0, false, 2},
 	}
 
