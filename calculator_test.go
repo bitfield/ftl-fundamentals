@@ -3,6 +3,7 @@ package calculator_test
 import (
 	"calculator"
 	"fmt"
+	"math"
 	"math/rand"
 	"testing"
 	"time"
@@ -118,6 +119,7 @@ func TestAddRandom(t *testing.T) {
 	s := rand.NewSource(time.Now().UnixNano())
 	r := rand.New(s)
 
+	t.Parallel()
 	for i := 0; i < 100; i++ {
 		first := r.Float64() * 100
 		second := r.Float64() * 100
@@ -132,12 +134,25 @@ func TestAddRandom(t *testing.T) {
 
 func TestSqrt(t *testing.T) {
 	cases := []testCaseWithErr{
-		{"Square root of zero should be zero", 0, 0, false, 1},
+		{"Square root of zero should be zero", 0, 0, false, 0},
 		{"Square root of a negative number should return an error", 0, 0, true, 0},
+		{"Square root of a positive whole number", 4, 0, false, 2},
 	}
 
 	t.Parallel()
 	for _, c := range cases {
+		t.Run(c.name, testSqrtFunc(c, calculator.Sqrt))
+	}
+
+	s := rand.NewSource(time.Now().UnixNano())
+	r := rand.New(s)
+
+	for i := 0; i < 100; i++ {
+		value := r.Float64() * 100
+		name := fmt.Sprintf("Square root of %f", value)
+		result := math.Sqrt(value)
+		c := testCaseWithErr{name, value, 0, false, result}
+
 		t.Run(c.name, testSqrtFunc(c, calculator.Sqrt))
 	}
 }
