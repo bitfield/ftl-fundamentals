@@ -60,6 +60,8 @@ func TestSubtract(t *testing.T) {
 		{"Subtract two fractional numbers", 2.3, 4.3, -2},
 		{"Subtract two fractional numbers equaling a whole number", 2.5, 1.5, 1},
 		{"Subtract two negative fractional numbers", -2.5, -1.5, -1},
+		{"Subtract a negative number from a positive number", 5, -3, 8},
+		{"Subtract a postitive number from a negative number", -4, 2, -6},
 	}
 
 	t.Parallel()
@@ -77,6 +79,7 @@ func TestMultiply(t *testing.T) {
 		{"Multiply two fractional numbers", 2.6, 5.3, 13.78},
 		{"Multiply two fractional numbers equaling a whole number", 1.5, 4, 6},
 		{"Multiply two negative fractional numbers", -1.5, -2.5, 3.75},
+		{"Multiply one postive number by one negative number", -5, 3, -15},
 	}
 
 	t.Parallel()
@@ -90,6 +93,7 @@ func TestDivide(t *testing.T) {
 		{"Divide two positive numbers", 4, 2, false, 2},
 		{"Divide two negative numbers", -4, -2, false, 2},
 		{"Divide one positive number by one negative number", 4, -2, false, -2},
+		{"Divide one negative number by one postive number", -4, 2, false, -2},
 		{"Divide two fractional positive numbers", 4.2, 2.1, false, 2},
 		{"Divide two fractional negative numbers equaling a whole number", -4.2, -2.1, false, 2},
 		{"Divide one positive number by zero", 4, 0, true, 0},
