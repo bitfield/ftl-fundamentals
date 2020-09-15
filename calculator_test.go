@@ -40,6 +40,7 @@ func TestAddRandom(t *testing.T) {
 		}
 	}
 }
+
 func TestSubtract(t *testing.T) {
 	t.Parallel()
 	type testCase struct {
