@@ -23,9 +23,9 @@ type testCase struct {
 func TestAdd(t *testing.T) {
 	t.Parallel()
 	tCases := []testCase{
-		{2, 2.030000, 4.030000, "some fractions1", SHLD_SUCCEED},
-		{6, 3.99, 9.99, "some fractions2", SHLD_SUCCEED},
-		{2, 2.03675, 4.03675, "some fractions3", SHLD_SUCCEED},
+		{2, 2.030000, 4.030000, "add fractions test 1: exp_succ", SHLD_SUCCEED},
+		{6, 3.99, 9.99, "add fractions test 2: exp_succ", SHLD_SUCCEED},
+		{2, 2.03675, 4.03675, "add fractions test3: exp_succ", SHLD_SUCCEED},
 	}
 	for _, tc := range tCases {
 		got := calculator.Add(tc.a, tc.b)
@@ -98,6 +98,6 @@ func TestDivide(t *testing.T) {
 
 }
 
-func printDivTestSummary(cntNoOfTests, cntTestExec, cntfuncErr, cntexpMismatch) {
+func printDivTestSummary(cntNoOfTests, cntTestExec, cntfuncErr, cntexpMismatch int) {
 	fmt.Printf("SummaryDiv: TotalTests: %d: Executed: %d: Failed: %d: Succeeded: %d\n", cntNoOfTests, cntTestExec, cntfuncErr, cntexpMismatch)
 }
