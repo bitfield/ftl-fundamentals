@@ -8,8 +8,8 @@ import (
 )
 
 const (
-	SHLD_SUCCEED = 1
-	SHLD_FAIL    = 0
+	SHLD_SUCCEED = 1 // We expect the test to succeed. If it fails, its an error
+	SHLD_FAIL    = 0 // We expect the test to fail. It it succeeds, its an error
 )
 
 type testCase struct {
@@ -59,12 +59,13 @@ func TestMultiply(t *testing.T) {
 func TestDivide(t *testing.T) {
 	t.Parallel()
 	tCases := []testCase{
-		{2.030000, 20, 9.852216, "Divide some fractions1", SHLD_SUCCEED},
-		{0, 3.99, 0, "Divide some fractions2", SHLD_FAIL},
-		{2, 0, 0, "Divide some fractions3", SHLD_SUCCEED},
+		{2.030000, 20, 9.852216, "Divide fractions 1", SHLD_SUCCEED},
+		{2, 0, 0, "Divide fractions 3", SHLD_SUCCEED},
+		{0, 3.99, 0, "Divide by 0", SHLD_FAIL},
 	}
 	cntTestExec, cntfuncErr, cntexpMismatch := 0, 0, 0
 	cntNoOfTests := len(tCases)
+	// If I have deferred it, why is it running here, in the flow. How is it related to tests?
 	defer printDivTestSummary(cntNoOfTests, cntTestExec, cntfuncErr, cntexpMismatch)
 
 	for _, tc := range tCases {
@@ -73,6 +74,7 @@ func TestDivide(t *testing.T) {
 		cntTestExec++
 
 		got, err := calculator.Divide(tc.a, tc.b)
+
 		if err != nil {
 			funcErr = true
 			cntfuncErr++
@@ -84,13 +86,13 @@ func TestDivide(t *testing.T) {
 			}
 		}
 		switch tc.tcExpStatus {
-		case SHLD_FAIL: // We have defined this test case to FAIL. Its err it it doesn't
+		case SHLD_FAIL: // We have defined this test case to FAIL. Its err if it doesn't
 			if !(funcErr || expMismatch) {
-				t.Errorf("want %f, got %f :: Test: %s", tc.want, got, tc.tcName)
+				t.Errorf("DivTest: %s :: want %f, got %f ", tc.tcName, tc.want, got)
 			}
-		case SHLD_SUCCEED: // We have defined this test case to SUCCEED. Its err it it doesn't
+		case SHLD_SUCCEED: // We have defined this test case to SUCCEED. Its err if it doesn't
 			if funcErr || expMismatch {
-				t.Errorf("want %f, got %f :: Test: %s", tc.want, got, tc.tcName)
+				t.Errorf("DivTest: %s :: want %f, got %f ", tc.tcName, tc.want, got)
 			}
 		}
 	}
