@@ -54,3 +54,20 @@ func TestSubtract(t *testing.T) {
 		}
 	}
 }
+
+
+func TestMultiply(t *testing.T) {
+	t.Parallel()
+	testCases := []testCase{
+		{a: 8, b:2, want: 16},
+		{a: 6, b:2, want: 12},
+		{a: 3, b:3, want: 9},
+	}
+
+	for _, tc := range testCases {
+		got := calculator.Multiply(tc.a, tc.b)
+		if tc.want != got {
+			t.Errorf("Multiply(%f,%f): want %f, got %f", tc.a, tc.b, tc.want, got)
+		}
+	}
+}
