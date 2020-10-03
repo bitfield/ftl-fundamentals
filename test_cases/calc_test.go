@@ -34,3 +34,23 @@ func TestAdd(t *testing.T) {
 	}
 
 }
+
+
+
+
+func TestSubtract(t *testing.T) {
+	t.Parallel()
+
+	testCases := []testCase{
+		{a: 4, b: 2, want: 2},
+		{a: 9, b: 4, want: 5},
+		{a: 10, b: 6, want: 4},
+	}
+
+	for _, tc := range testCases {
+		got := calculator.Subtract(tc.a, tc.b)
+		if tc.want != got {
+			t.Errorf("Subtract(%f,%f): want %f, got %f", tc.a, tc.b, tc.want, got)
+		}
+	}
+}
