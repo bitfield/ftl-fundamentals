@@ -18,6 +18,10 @@ Absolutely. [For the Love of Go: Fundamentals](https://bitfieldconsulting.com/bo
 
 You don't need to buy the book to work through these exercises, though it'll definitely help! But if you do buy it, you'll be helping support me and my work, including developing new exercises and books, and mentoring people from non-traditional backgrounds to help them into tech and software development careers. Which would be amazing! You can also [sponsor me on GitHub](https://github.com/sponsors/bitfield).
 
+You can find more Go books here in my online shop:
+
+* [For the Love of Go](https://bitfieldconsulting.com/books)
+
 ## What you'll learn
 
 In this set of exercises, you'll learn:
@@ -233,6 +237,10 @@ When the feature is complete to your own satisfaction, you're done! Nice work. T
 Yes. We've been over this. You can buy the book, which covers all the exercises in much more detail, including a complete step-by-step guide to solving them, here:
 
 * [For the Love of Go: Fundamentals](https://bitfieldconsulting.com/books/fundamentals)
+
+And now there's a sequel! 'For the Love of Go: Data' takes what we've learned here, and applies it to building the core functionality of a cool online bookstore. Along the way we'll find out about Go's basic data types, defining our own struct types, manipulating collections of data using slices and maps, and much more!
+
+* [For the Love of Go: Data](https://bitfieldconsulting.com/books/data)
 
 ## What's next?
 
