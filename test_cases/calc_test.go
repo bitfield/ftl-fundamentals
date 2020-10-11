@@ -81,7 +81,7 @@ func TestDivide(t *testing.T) {
 		{a: 12, b:4, want: 3, errExpected: true},
 	}
 	for _, tc := range testCases {
-		err := 
+		err :=
 		errReceived := err != nil
 		got, _ := calculator.Divide(tc.a, tc.b )
 		//if tc.want != got {
