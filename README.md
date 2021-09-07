@@ -10,17 +10,17 @@ This is a set of introductory exercises in Go programming, suitable for complete
 
 (If you do already know something about Go, you should find these exercises relatively straightforward, but still worth doing.)
 
-## Is there an ebook to accompany these exercises?
+## Is there a book to accompany these exercises?
 
-Absolutely. [For the Love of Go: Fundamentals](https://bitfieldconsulting.com/books/fundamentals) is a downloadable ebook which guides you through every step of the process, from installing Go to explaining all the ins and outs of test-driven development. It also contains almost all the code you'll need to solve these exercises, with full details of how it works.
+Absolutely. [For the Love of Go](https://bitfieldconsulting.com/books/love) guides you through every step of the process, from installing Go to explaining all the ins and outs of test-driven development. It also contains almost all the code you'll need to solve these exercises, with full details of how it works.
 
-[![](img/cover_small.png)](https://bitfieldconsulting.com/books/fundamentals)
+[![](img/cover_small.png)](https://bitfieldconsulting.com/books/love)
 
 You don't need to buy the book to work through these exercises, though it'll definitely help! But if you do buy it, you'll be helping support me and my work, including developing new exercises and books, and mentoring people from non-traditional backgrounds to help them into tech and software development careers. Which would be amazing! You can also [sponsor me on GitHub](https://github.com/sponsors/bitfield).
 
-You can find more Go books here in my online shop:
+There's also a video course to accompany the book:
 
-* [For the Love of Go](https://bitfieldconsulting.com/books)
+* [For the Love of Go Video Course](https://bitfieldconsulting.com/courses/love)
 
 ## What you'll learn
 
@@ -232,15 +232,9 @@ When the feature is complete to your own satisfaction, you're done! Nice work. T
 
 * [Learn Go with mentoring](https://bitfieldconsulting.com/golang/learn)
 
-## Has it been published as a friendly, low-priced ebook?
+## Further reading
 
-Yes. We've been over this. You can buy the book, which covers all the exercises in much more detail, including a complete step-by-step guide to solving them, here:
-
-* [For the Love of Go: Fundamentals](https://bitfieldconsulting.com/books/fundamentals)
-
-And now there's a sequel! 'For the Love of Go: Data' takes what we've learned here, and applies it to building the core functionality of a cool online bookstore. Along the way we'll find out about Go's basic data types, defining our own struct types, manipulating collections of data using slices and maps, and much more!
-
-* [For the Love of Go: Data](https://bitfieldconsulting.com/books/data)
+* [For the Love of Go](https://bitfieldconsulting.com/books/love)
 
 ## What's next?
 
