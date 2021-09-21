@@ -18,6 +18,10 @@ Absolutely. [For the Love of Go](https://bitfieldconsulting.com/books/love) guid
 
 You don't need to buy the book to work through these exercises, though it'll definitely help! But if you do buy it, you'll be helping support me and my work, including developing new exercises and books, and mentoring people from non-traditional backgrounds to help them into tech and software development careers. Which would be amazing! You can also [sponsor me on GitHub](https://github.com/sponsors/bitfield).
 
+Here it is:
+
+* [For the Love of Go](https://bitfieldconsulting.com/books/love)
+
 There's also a video course to accompany the book:
 
 * [For the Love of Go Video Course](https://bitfieldconsulting.com/courses/love)
